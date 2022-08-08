@@ -6,15 +6,21 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.example.diceroller.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val rollButton: Button = findViewById(R.id.btnRoll)
+        val rollButton = binding.btnRoll
         rollButton.setOnClickListener { rollDice() }
     }
+
     /**
      * Roll the dice and update the screen image with the result.
      */
@@ -23,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val dice = Dice(6)
         val diceRoll = dice.roll()
         // Update the imageview with the corresponding dice result image.
-        val diceImage: ImageView = findViewById(R.id.ivDice)
+        val diceImage = binding.ivDice
         val drawableResource = when (diceRoll) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2
